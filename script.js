@@ -71,34 +71,7 @@ function initContactSave() {
   if (!btnSaveContact) return;
 
   btnSaveContact.addEventListener("click", () => {
-    // 표준 vCard 포맷 텍스트 생성
-    const vCardData = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
-      `N:${CONTACT_INFO.name};;;;`,
-      `FN:${CONTACT_INFO.name} (${CONTACT_INFO.company})`,
-      `ORG:${CONTACT_INFO.company};`,
-      `TITLE:${CONTACT_INFO.title}`,
-      `TEL;TYPE=CELL:${CONTACT_INFO.phone}`,
-      `EMAIL;TYPE=WORK:${CONTACT_INFO.email}`,
-      `ADR;TYPE=WORK:;;${CONTACT_INFO.address};;;;`,
-      `URL:${CONTACT_INFO.website}`,
-      "NOTE:힐스테이트 회룡역파크뷰 공식 모바일 명함",
-      "END:VCARD"
-    ].join("\r\n");
-
-    // Blob 생성 및 다운로드 링크 트리거
-    const blob = new Blob([vCardData], { type: "text/vcard;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${CONTACT_INFO.name}_연락처.vcf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-
-    showToast("👤 연락처 파일이 열렸습니다. [저장]을 눌러주세요!");
+    showToast("👤 연락처가 다운로드되었습니다. [열기] 후 [저장]을 눌러주세요!");
   });
 }
 
