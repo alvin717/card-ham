@@ -1,29 +1,26 @@
 /**
  * ==========================================================================
- * 힐스테이트 회룡역파크뷰 모바일 명함 스크립트 (script.js)
+ * indesign plus CEO 신은호 모바일 명함 스크립트 (script.js)
  * 
  * - 주요 기능:
- *   1. 명함 이미지 터치 시 즉시 전화 걸기 (010-7675-3098)
- *   2. 주소록 저장 (vCard 파일 자동 생성 및 다운로드)
- *   3. 견본주택 주소 원터치 복사
+ *   1. 명함 이미지 터치 시 즉시 전화 걸기 (010-8691-2938)
+ *   2. 주소록 저장 (vCard 파일 다운로드)
+ *   3. 사무실 주소 원터치 복사
  *   4. 카카오톡 및 SNS 명함 공유하기
  *   5. URL 파라미터(?call=1) 감지 시 자동 전화 다이얼 연결
  * ==========================================================================
  */
 
-// 실장님 기본 연락처 정보 상수
+// 대표님 기본 연락처 정보 상수
 const CONTACT_INFO = {
-  name: "이진형 실장",
-  company: "힐스테이트 회룡역파크뷰",
-  title: "3본부 2팀 실장",
-  phone: "010-7675-3098",
-  cleanPhone: "01076753098",
-  email: "aonehair01@naver.com",
-  address: "경기도 의정부시 호원동 288",
-  website: "https://hyeong-homepage.vercel.app/",
-  blog: "https://blog.naver.com/aonehair01",
-  openKakao: "https://open.kakao.com/o/sCaiVWMh",
-  youtube: "https://www.youtube.com/@형HYEONG"
+  name: "신은호 대표",
+  company: "indesign plus",
+  title: "CEO",
+  phone: "010-8691-2938",
+  cleanPhone: "01086912938",
+  email: "eunho2546@naver.com",
+  address: "강원특별자치도 속초시 수복로85, 1층(교동)",
+  website: "http://www.indesignplus.co.kr/main/"
 };
 
 // DOM이 완전히 로드된 후 실행
@@ -44,7 +41,7 @@ function initTouchCall() {
 
   // 터치 시 시각 피드백 제공 후 고유 a 태그 tel 링크로 즉시 통화 연결
   cardTouchArea.addEventListener("click", () => {
-    showToast("📞 이진형에게 전화를 연결합니다...");
+    showToast("📞 신은호 대표에게 전화를 연결합니다...");
   });
 }
 
@@ -76,7 +73,7 @@ function initContactSave() {
 }
 
 /**
- * 4. 견본주택 주소 원터치 복사 기능
+ * 4. 사무실 주소 원터치 복사 기능
  */
 function initCopyAddress() {
   const btnCopyAddress = document.getElementById("btnCopyAddress");
@@ -97,7 +94,7 @@ function initCopyAddress() {
       }
       showToast("📍 주소가 복사되었습니다! (내비게이션에 붙여넣기)");
     } catch (err) {
-      showToast("📍 견본주택: " + CONTACT_INFO.address);
+      showToast("📍 사무실 주소: " + CONTACT_INFO.address);
     }
   });
 }
@@ -109,17 +106,14 @@ function initShareFeatures() {
   const btnShareKakao = document.getElementById("btnShareKakao");
   const btnShareLink = document.getElementById("btnShareLink");
 
-  // 대표 공유 URL: 로컬 파일(file:) 또는 로컬호스트 실행 시에도 실제 웹사이트 주소로 정확히 연결
-  const defaultShareUrl = CONTACT_INFO.website || "https://hyeong-homepage.vercel.app/";
   const baseUrl = (window.location.protocol === "http:" || window.location.protocol === "https:") && !window.location.hostname.includes("localhost") && !window.location.hostname.includes("127.0.0.1")
     ? window.location.href.split("?")[0]
-    : defaultShareUrl;
+    : window.location.href;
 
-  // 카카오톡 카드를 누르면 웹이 열리면서 즉시 전화 다이얼이 자동으로 열리도록 ?call=1 파라미터 적용
   const callShareUrl = baseUrl.includes("?") ? `${baseUrl}&call=1` : `${baseUrl}?call=1`;
 
-  const shareTitle = `[힐스테이트 회룡역파크뷰] 이진형 모바일 명함`;
-  const shareText = `힐스테이트 회룡역파크뷰 이진형 공식 모바일 명함입니다.\n(터치 시 010-7675-3098 로 즉시 통화 연결)\n📍 견본주택: ${CONTACT_INFO.address}`;
+  const shareTitle = `[indesign plus] CEO 신은호 모바일 명함`;
+  const shareText = `indesign plus CEO 신은호 공식 모바일 명함입니다.\n(터치 시 010-8691-2938 로 즉시 통화 연결)\n📍 주소: ${CONTACT_INFO.address}`;
 
   // 카카오톡 / 일반 공유 버튼 (내 카톡으로 받기 / 지인에게 전달하기)
   if (btnShareKakao) {
@@ -133,10 +127,9 @@ function initShareFeatures() {
             url: callShareUrl
           });
         } catch (err) {
-          // 공유 창 취소 시
+          // 공유 창 취소 시 무시
         }
       } else {
-        // PC 브라우저 등에서는 명함 주소 클립보드 복사 후 안내
         copyToClipboard(callShareUrl, "💬 전화 바로연결 명함 주소가 복사되었습니다! 카카오톡에 붙여넣어 전송하세요.");
       }
     });

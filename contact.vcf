@@ -1,12 +1,12 @@
 BEGIN:VCARD
 VERSION:3.0
-N:이;진형;;;
-FN:이진형 실장 (힐스테이트 회룡역파크뷰)
-ORG:힐스테이트 회룡역파크뷰;
-TITLE:3본부 2팀 실장
-TEL;TYPE=CELL;TYPE=VOICE;TYPE=pref:010-7675-3098
-EMAIL;TYPE=INTERNET;TYPE=WORK;TYPE=pref:aonehair01@naver.com
-ADR;TYPE=WORK;TYPE=pref:;;경기도 의정부시 호원동 288;;;;
-URL;TYPE=WORK:https://hyeong-homepage.vercel.app/
-NOTE:힐스테이트 회룡역파크뷰 공식 모바일 명함
+N:신;은호;;;
+FN:신은호 대표 (indesign plus)
+ORG:indesign plus;
+TITLE:CEO
+TEL;TYPE=CELL;TYPE=VOICE;TYPE=pref:010-8691-2938
+EMAIL;TYPE=INTERNET;TYPE=WORK;TYPE=pref:eunho2546@naver.com
+ADR;TYPE=WORK;TYPE=pref:;;강원특별자치도 속초시 수복로85, 1층(교동);;;;
+URL;TYPE=WORK:http://www.indesignplus.co.kr/main/
+NOTE:indesign plus CEO 신은호 공식 모바일 명함
 END:VCARD
