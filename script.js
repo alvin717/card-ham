@@ -106,7 +106,7 @@ function initShareFeatures() {
   const btnShareLink = document.getElementById("btnShareLink");
 
   // 현재 브라우저의 웹 주소 기준 (GitHub Pages 웹 주소)
-  const defaultShareUrl = "https://alvin717.github.io/my--card/";
+  const defaultShareUrl = "https://alvin717.github.io/card-ham/";
   const baseUrl = (window.location.protocol === "http:" || window.location.protocol === "https:") && !window.location.hostname.includes("localhost") && !window.location.hostname.includes("127.0.0.1")
     ? window.location.href.split("?")[0]
     : defaultShareUrl;

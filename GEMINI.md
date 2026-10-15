@@ -35,13 +35,7 @@
 - 사무실 주소: 강원도 속초시 동해대로4236(교동) 아남프라자 11층
 
 ## 6. 공식 배포 및 GitHub Pages 저장소 규정
-- GitHub 저장소: https://github.com/alvin717/my--card.git
+- GitHub 저장소: https://github.com/alvin717/card-ham.git
+- GitHub Pages 배포 웹 주소: https://alvin717.github.io/card-ham/
 - 브랜치: main
 - 자동 동기화 스크립트: 배포하기.bat
-- 공식 웹 주소 체계:
-  - 🌐 공식 통합 포털: https://alvin717.github.io/my--card/
-  - 👤 이진형 실장 명함: https://alvin717.github.io/my--card/lee/
-  - 👤 신은호 대표 명함: https://alvin717.github.io/my--card/shin/
-  - 👤 함용순 팀장 명함: https://alvin717.github.io/my--card/ham/
-
-
