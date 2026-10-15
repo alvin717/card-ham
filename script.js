@@ -7,7 +7,7 @@
  *   2. 주소록 저장 (vCard 파일 다운로드)
  *   3. 사무실 주소 원터치 복사
  *   4. 카카오톡 및 SNS 명함 공유하기
- *   5. URL 파라미터(?call=1) 감지 시 자동 전화 다이얼 연결
+ *   5. 카카오톡 인앱 브라우저에서 공식 홈페이지(HTTP) 및 외부 링크 완벽 지원
  * ==========================================================================
  */
 
@@ -20,7 +20,9 @@ const CONTACT_INFO = {
   cleanPhone: "01086912938",
   email: "eunho2546@naver.com",
   address: "강원특별자치도 속초시 수복로85, 1층(교동)",
-  website: "http://www.indesignplus.co.kr/main/"
+  website: "http://www.indesignplus.co.kr/main/",
+  naverMap: "https://map.naver.com/v5/search/%EA%B0%95%EC%9B%90%ED%8A%B9%EB%B3%84%EC%9E%90%EC%B9%98%EB%8F%84%20%EC%86%8D%EC%B4%88%EC%8B%9C%20%EC%88%98%EB%B3%B5%EB%A1%9C85",
+  deployUrl: "https://my-card-blond-phi.vercel.app"
 };
 
 // DOM이 완전히 로드된 후 실행
@@ -28,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initTouchCall();
   initContactSave();
   initCopyAddress();
+  initExternalLinks();
   initShareFeatures();
-  checkAutoCallParam();
 });
 
 /**
@@ -39,29 +41,46 @@ function initTouchCall() {
   const cardTouchArea = document.getElementById("cardTouchArea");
   if (!cardTouchArea) return;
 
-  // 터치 시 시각 피드백 제공 후 고유 a 태그 tel 링크로 즉시 통화 연결
+  // 터치 시 피드백 알림 후 전화 연결
   cardTouchArea.addEventListener("click", () => {
     showToast("📞 신은호 대표에게 전화를 연결합니다...");
   });
 }
 
 /**
- * 2. URL 파라미터 확인 후 자동 전화 걸기 (?call=1 or ?auto=true)
- * 카카오톡 카드에서 바로 통화 목적으로 링크를 걸었을 때 작동
+ * 2. 외부 웹사이트 및 지도 링크 처리
+ * - 카카오톡 인앱 브라우저는 HTTP 웹사이트를 보안상 차단하거나 새 탭을 안 띄우므로
+ *   카카오톡 전용 외부 브라우저 호출 스킴(openExternal)을 사용하여 스마트폰 기본 브라우저(사파리/크롬)로 100% 안전하게 열어줍니다.
  */
-function checkAutoCallParam() {
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("call") === "1" || urlParams.get("auto") === "true") {
-    showToast("📞 잠시 후 전화 통화 화면이 열립니다...");
-    setTimeout(() => {
-      window.location.href = `tel:${CONTACT_INFO.cleanPhone}`;
-    }, 400);
+function initExternalLinks() {
+  const isKakaoTalk = /KAKAOTALK/i.test(navigator.userAgent);
+
+  // 공식 웹사이트 링크
+  const btnWebsite = document.getElementById("btnWebsite");
+  if (btnWebsite) {
+    btnWebsite.addEventListener("click", (e) => {
+      if (isKakaoTalk) {
+        e.preventDefault();
+        // 카카오톡 외부 브라우저 열기 호출
+        window.location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(CONTACT_INFO.website)}`;
+      }
+    });
+  }
+
+  // 네이버 지도 링크
+  const btnNaverMap = document.getElementById("btnNaverMap");
+  if (btnNaverMap) {
+    btnNaverMap.addEventListener("click", (e) => {
+      if (isKakaoTalk) {
+        e.preventDefault();
+        window.location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(CONTACT_INFO.naverMap)}`;
+      }
+    });
   }
 }
 
 /**
  * 3. 스마트폰 주소록 저장 기능 (vCard .vcf 파일 생성)
- * 아이폰/갤럭시 상관없이 터치 한 번으로 연락처에 바로 저장
  */
 function initContactSave() {
   const btnSaveContact = document.getElementById("btnSaveContact");
@@ -84,7 +103,6 @@ function initCopyAddress() {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(CONTACT_INFO.address);
       } else {
-        // 구형 브라우저 대응
         const tempInput = document.createElement("input");
         tempInput.value = CONTACT_INFO.address;
         document.body.appendChild(tempInput);
@@ -106,31 +124,27 @@ function initShareFeatures() {
   const btnShareKakao = document.getElementById("btnShareKakao");
   const btnShareLink = document.getElementById("btnShareLink");
 
-  const baseUrl = (window.location.protocol === "http:" || window.location.protocol === "https:") && !window.location.hostname.includes("localhost") && !window.location.hostname.includes("127.0.0.1")
-    ? window.location.href.split("?")[0]
-    : window.location.href;
-
-  const callShareUrl = baseUrl.includes("?") ? `${baseUrl}&call=1` : `${baseUrl}?call=1`;
+  // 실제 공유할 명함 웹페이지 주소
+  const shareUrl = CONTACT_INFO.deployUrl;
 
   const shareTitle = `[indesign plus] CEO 신은호 모바일 명함`;
   const shareText = `indesign plus CEO 신은호 공식 모바일 명함입니다.\n(터치 시 010-8691-2938 로 즉시 통화 연결)\n📍 주소: ${CONTACT_INFO.address}`;
 
-  // 카카오톡 / 일반 공유 버튼 (내 카톡으로 받기 / 지인에게 전달하기)
+  // 카카오톡 공유 버튼
   if (btnShareKakao) {
     btnShareKakao.addEventListener("click", async () => {
-      // 스마트폰 기본 공유 기능(카카오톡 나와의 채팅 / 친구 선택 가능)이 지원되는 경우
       if (navigator.share) {
         try {
           await navigator.share({
             title: shareTitle,
             text: shareText,
-            url: callShareUrl
+            url: shareUrl
           });
         } catch (err) {
-          // 공유 창 취소 시 무시
+          // 공유 취소 시
         }
       } else {
-        copyToClipboard(callShareUrl, "💬 전화 바로연결 명함 주소가 복사되었습니다! 카카오톡에 붙여넣어 전송하세요.");
+        copyToClipboard(shareUrl, "💬 명함 인터넷 주소가 복사되었습니다! 카카오톡에 붙여넣어 전송하세요.");
       }
     });
   }
@@ -138,7 +152,7 @@ function initShareFeatures() {
   // 링크 복사 버튼
   if (btnShareLink) {
     btnShareLink.addEventListener("click", () => {
-      copyToClipboard(callShareUrl, "🔗 전화 바로연결 명함 주소가 복사되었습니다!");
+      copyToClipboard(shareUrl, "🔗 명함 인터넷 주소가 복사되었습니다!");
     });
   }
 }
