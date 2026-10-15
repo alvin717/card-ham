@@ -1,27 +1,28 @@
 /* ==========================================================================
-   힐스테이트 회룡역파크뷰 모바일 명함 스타일시트 (style.css)
+   삼성생명 속초금융지점 함용순 팀장 모바일 명함 스타일시트 (style.css)
    - 설계 원칙: 모바일 퍼스트(375px~390px 기준), 가벼운 순수 CSS3, 터치 친화적 UI
    ========================================================================== */
 
-/* 1. 디자인 시스템 변수 설정 (색상, 여백, 그림자) */
+/* 1. 디자인 시스템 변수 설정 (삼성 블루, 정갈한 화이트, 여백, 그림자) */
 :root {
-  --primary-color: #0b3b60;        /* 현대 힐스테이트 딥 네이비 */
-  --primary-light: #165b94;        /* 밝은 네이비 */
-  --accent-gold: #c59b27;          /* 럭셔리 골드 포인트 */
+  --primary-color: #0c4da2;        /* 삼성 블루 (신뢰와 품격) */
+  --primary-dark: #002c6c;         /* 딥 네이비 */
+  --primary-light: #1877f2;        /* 밝고 활기찬 블루 */
+  --accent-gold: #c59b27;          /* 골드 포인트 */
   --accent-green: #25d366;         /* 전화/통화 강조 그린 */
   --kakao-yellow: #fee500;         /* 카카오톡 고유 노란색 */
   --kakao-brown: #3c1e1e;          /* 카카오톡 텍스트 갈색 */
   
-  --bg-gradient-start: #f4f7fb;   /* 배경 소프트 블루그레이 */
-  --bg-gradient-end: #e9eef5;
+  --bg-gradient-start: #f3f6fb;   /* 부드러운 소프트 블루그레이 배경 */
+  --bg-gradient-end: #e7eef7;
   --card-bg: #ffffff;
   --text-main: #1e293b;            /* 메인 텍스트 진한 그레이 */
   --text-muted: #64748b;           /* 서브 안내 텍스트 */
   --border-color: #e2e8f0;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 8px 24px rgba(11, 59, 96, 0.12);
-  --shadow-lg: 0 16px 36px rgba(11, 59, 96, 0.18);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(12, 77, 162, 0.12);
+  --shadow-lg: 0 16px 36px rgba(12, 77, 162, 0.16);
   
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -33,7 +34,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent; /* 터치 시 파란 잔상 제거 */
+  -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 푸른 잔상 제거 */
 }
 
 html, body {
@@ -66,20 +67,21 @@ html, body {
 
 .badge {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent-gold);
-  background-color: rgba(197, 155, 39, 0.12);
-  border: 1px solid rgba(197, 155, 39, 0.3);
-  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background-color: rgba(12, 77, 162, 0.08);
+  border: 1px solid rgba(12, 77, 162, 0.2);
+  padding: 5px 14px;
   border-radius: 20px;
   margin-bottom: 8px;
+  letter-spacing: 0.5px;
 }
 
 .main-title {
   font-size: 1.55rem;
   font-weight: 800;
-  color: var(--primary-color);
+  color: var(--primary-dark);
   letter-spacing: -0.5px;
   margin-bottom: 4px;
 }
@@ -95,131 +97,92 @@ html, body {
   margin-bottom: 22px;
 }
 
-.card-wrapper {
-  display: block;
-  text-decoration: none;
-  position: relative;
-  width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  cursor: pointer;
-  background-color: var(--card-bg);
-  border: 2px solid rgba(11, 59, 96, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* 터치 및 마우스 반응 */
-.card-wrapper:hover,
-.card-wrapper:focus {
-  transform: translateY(-3px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(11, 59, 96, 0.25);
-  outline: none;
-}
-
-.card-wrapper:active {
-  transform: scale(0.98);
-}
-
-/* 명함 상단 알림 배너 */
 .touch-call-notice {
-  background: linear-gradient(135deg, #0b3b60 0%, #165b94 100%);
-  color: #ffffff;
-  padding: 10px 14px;
-  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 12px rgba(11, 59, 96, 0.15);
-  border: 1px solid rgba(197, 155, 39, 0.3);
+  gap: 6px;
+  background: linear-gradient(90deg, #eaf2ff 0%, #e0edff 100%);
+  border: 1px solid #c7ddff;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: var(--primary-dark);
+  box-shadow: var(--shadow-sm);
+  animation: pulseNotice 2s infinite ease-in-out;
 }
 
-.notice-text {
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.notice-text strong {
-  color: #ffd768;
-  font-weight: 800;
-}
-
-/* 실제 명함 이미지 */
-.business-card-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-/* 이미지 모서리 컴팩트 인디케이터 */
-.card-touch-indicator {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-}
-
-.indicator-tag {
-  background: rgba(11, 59, 96, 0.88);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  animation: pulseTag 2s infinite ease-in-out;
-}
-
-@keyframes pulseTag {
-  0%, 100% { transform: scale(1); opacity: 0.95; }
-  50% { transform: scale(1.05); opacity: 1; border-color: var(--accent-gold); }
+@keyframes pulseNotice {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
 }
 
 .touch-icon {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   animation: bounceTouch 1.5s infinite;
 }
 
 @keyframes bounceTouch {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  50% { transform: translateY(-4px); }
+}
+
+.card-wrapper {
+  display: block;
+  text-decoration: none;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid rgba(12, 77, 162, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-wrapper:hover, .card-wrapper:active {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(12, 77, 162, 0.24);
+  border-color: var(--primary-color);
+}
+
+.business-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 .touch-tip {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   margin-top: 8px;
 }
 
-/* 6. 빠른 연락 액션 버튼 그룹 (최소 높이 44px 준수, 54px로 터치 극대화) */
+/* 6. 빠른 액션 버튼 그룹 (전화 / 문자 / 주소록 저장) */
 .quick-actions {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .action-btn {
   display: flex;
   align-items: center;
-  gap: 14px;
-  min-height: 54px; /* 최소 터치 높이 규칙 준수 */
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
+  min-height: 54px; /* 터치 표준 규격 44px 이상 */
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  border: none;
-  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
   box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
-  width: 100%;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  cursor: pointer;
 }
 
 .action-btn:active {
@@ -227,10 +190,9 @@ html, body {
 }
 
 .btn-icon {
-  font-size: 1.45rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.5rem;
+  margin-right: 14px;
+  flex-shrink: 0;
 }
 
 .btn-info {
@@ -240,62 +202,54 @@ html, body {
 }
 
 .btn-label {
-  font-size: 0.76rem;
-  opacity: 0.85;
+  font-size: 0.78rem;
+  opacity: 0.9;
+  font-weight: 500;
 }
 
 .btn-value {
   font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.3px;
 }
 
-/* 메인 전화 통화 버튼 */
+/* 직통 전화 버튼 (프리미엄 블루 그라데이션) */
 .btn-call {
-  background: linear-gradient(135deg, #0b3b60 0%, #17578c 100%);
+  background: linear-gradient(135deg, #0c4da2 0%, #002c6c 100%);
   color: #ffffff;
-  border-left: 5px solid var(--accent-gold);
+  border: none;
 }
 
 /* 문자 문의 버튼 */
 .btn-sms {
-  background-color: #ffffff;
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-}
-
-.btn-sms:hover {
-  background-color: #f8fafc;
+  background: #ffffff;
+  color: var(--primary-dark);
+  border: 1.5px solid #c7ddff;
 }
 
 /* 주소록 저장 버튼 */
 .btn-vcard {
-  background-color: #ffffff;
-  color: var(--primary-color);
-  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: var(--text-main);
+  border: 1.5px solid var(--border-color);
 }
 
-.btn-vcard:hover {
-  background-color: #f1f5f9;
-}
-
-/* 7. 상세 링크 및 채널 섹션 */
+/* 7. 상세 정보 리스트 */
 .detail-section {
   background-color: var(--card-bg);
   border-radius: var(--radius-md);
   padding: 18px 16px;
+  margin-bottom: 22px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
-  margin-bottom: 20px;
 }
 
 .section-title {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: var(--primary-dark);
   margin-bottom: 14px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #edf2f7;
+  padding-left: 6px;
+  border-left: 4px solid var(--primary-color);
 }
 
 .link-list {
@@ -307,34 +261,30 @@ html, body {
 .link-item {
   display: flex;
   align-items: center;
-  min-height: 48px; /* 터치 높이 확보 */
-  padding: 10px 12px;
+  min-height: 52px;
+  padding: 12px 14px;
+  background-color: #f8fafc;
   border-radius: var(--radius-sm);
   text-decoration: none;
   color: inherit;
-  background-color: #f8fafc;
-  border: 1px solid #eef2f6;
-  transition: all 0.15s ease;
+  border: 1px solid #edf2f7;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
 }
 
-.link-item:hover,
-.link-item:focus {
+.link-item:hover, .link-item:active {
   background-color: #f1f5f9;
   border-color: #cbd5e1;
-}
-
-.link-item:active {
-  transform: scale(0.99);
 }
 
 .link-icon-box {
   width: 38px;
   height: 38px;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   margin-right: 12px;
   flex-shrink: 0;
   background-color: #ffffff;
@@ -345,131 +295,143 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .link-title {
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 600;
   color: var(--text-main);
 }
 
 .link-desc {
-  font-size: 0.77rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
-  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
 }
 
 .arrow-icon {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #94a3b8;
-  font-weight: 700;
+  font-weight: bold;
   margin-left: 8px;
 }
 
 .copy-badge {
   font-size: 0.72rem;
-  background-color: var(--primary-color);
-  color: #ffffff;
-  padding: 4px 8px;
-  border-radius: 6px;
   font-weight: 600;
+  color: var(--primary-color);
+  background-color: #eaf2ff;
+  border: 1px solid #c7ddff;
+  padding: 3px 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 
-/* 카카오톡 오픈상담 강조 스타일 */
-.item-kakao-chat {
-  background: linear-gradient(135deg, #fffdf0 0%, #fff9db 100%);
-  border: 1px solid #fce570;
-}
-
-.item-kakao-chat:hover,
-.item-kakao-chat:focus {
-  background: #fef3c7;
-  border-color: #f59e0b;
-}
-
-.kakao-chat-icon {
-  background-color: var(--kakao-yellow);
-}
-
-.chat-badge {
-  font-size: 0.72rem;
-  background-color: #facc15;
-  color: #3f2604;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-weight: 700;
-  border: 1px solid rgba(0,0,0,0.06);
-}
-
-.address-item {
-  cursor: pointer;
-}
-
-/* 8. 사업 참여사 안내 바 */
-.partner-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  background-color: #ffffff;
-  padding: 14px;
+/* 8. 종합 금융 컨설팅 그리드 */
+.service-section {
+  background-color: var(--card-bg);
   border-radius: var(--radius-md);
-  margin-bottom: 20px;
+  padding: 18px 16px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
 }
 
-.partner-item {
-  display: flex;
-  flex-direction: column;
-  padding: 6px 10px;
-  background-color: #f8fafc;
-  border-radius: 8px;
-}
-
-.partner-role {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-
-.partner-name {
-  font-size: 0.85rem;
-  color: var(--primary-color);
+.service-title {
+  font-size: 1.05rem;
   font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 14px;
+  padding-left: 6px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.service-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+  border-color: #c7ddff;
+}
+
+.service-icon {
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.service-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.service-desc {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.35;
 }
 
 /* 9. 공유하기 섹션 */
 .share-section {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .share-title {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  margin-bottom: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12px;
 }
 
 .share-buttons {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
 .share-btn {
-  flex: 1;
-  min-height: 46px; /* 터치 확보 */
+  min-height: 48px;
+  padding: 10px 14px;
   border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
   border: none;
-  font-size: 0.86rem;
-  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: transform 0.15s ease;
+  gap: 8px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .share-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .btn-share-kakao {
@@ -478,47 +440,49 @@ html, body {
 }
 
 .btn-share-link {
-  background-color: #ffffff;
+  background-color: #f1f5f9;
   color: var(--text-main);
-  border: 1px solid var(--border-color);
+  border: 1px solid #cbd5e1;
 }
 
-/* 10. 하단 스페이서 (플로팅 바와 콘텐츠 겹침 방지) */
+/* 10. 하단 여백 및 하단 고정 전화 상담 바 */
 .bottom-spacer {
   height: 70px;
 }
 
-/* 11. [GEMINI.md 필수 지침] 화면 하단 고정 전화 상담 플로팅 바 */
 .floating-call-bar {
   position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
   padding: 10px 16px;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(11, 59, 96, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   z-index: 1000;
   display: flex;
   justify-content: center;
 }
 
 .floating-call-link {
-  width: 100%;
-  max-width: 480px;
-  min-height: 50px; /* 터치 높이 확보 */
-  background: linear-gradient(135deg, #0b3b60 0%, #165b94 100%);
-  color: #ffffff;
-  border-radius: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  width: 100%;
+  max-width: 448px;
+  min-height: 50px;
+  background: linear-gradient(135deg, #0c4da2 0%, #002c6c 100%);
+  color: #ffffff;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(11, 59, 96, 0.35);
-  transition: transform 0.2s ease;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(12, 77, 162, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .floating-call-link:active {
@@ -529,55 +493,34 @@ html, body {
   font-size: 1.25rem;
 }
 
-.floating-text {
-  font-size: 0.95rem;
-}
-
 .floating-text strong {
-  color: #ffd768;
+  color: #fffb00;
+  font-weight: 800;
 }
 
-/* 12. 토스트 팝업 (모바일 하단 플로팅 바 바로 위에 표시) */
+/* 11. 알림 토스트 팝업 */
 .toast-popup {
   position: fixed;
-  bottom: 80px;
+  top: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(30px);
-  background-color: rgba(11, 59, 96, 0.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(15, 23, 42, 0.92);
   color: #ffffff;
   padding: 12px 20px;
-  border-radius: 30px;
-  font-size: 0.86rem;
-  font-weight: 600;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(197, 155, 39, 0.6);
-  z-index: 99999;
+  border-radius: 24px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  z-index: 2000;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
   pointer-events: none;
   white-space: nowrap;
-  max-width: 90%;
-  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .toast-popup.show {
-  transform: translateX(-50%) translateY(0);
   opacity: 1;
   visibility: visible;
-}
-
-/* 13. 반응형 미디어 쿼리 (GEMINI.md 기준) */
-/* 태블릿 및 데스크톱: 화면 중앙 카드 형태로 안정적인 뷰 제공 */
-@media (min-width: 768px) {
-  .mobile-container {
-    padding-top: 40px;
-    padding-bottom: 60px;
-  }
-  
-  .card-wrapper:hover {
-    transform: translateY(-5px);
-  }
+  transform: translateX(-50%) translateY(0);
 }

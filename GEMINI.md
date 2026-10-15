@@ -25,9 +25,18 @@
 - 이미지 alt 속성 및 외부 링크 rel="noopener noreferrer" 필수
 - HTML, CSS, JS 파일 모듈 분리 작성
 
-## 5. 배포 및 깃허브(GitHub) 저장소 규정
-- 공식 GitHub 저장소: https://github.com/alvin717/my--card.git
-- Vercel 배포 도메인: https://my-card-blond-phi.vercel.app
+## 5. 명함 기본 정보 (삼성생명 속초금융지점)
+- 이름: 함용순 팀장
+- 소속: 삼성생명 · 삼성화재 · 삼성카드 속초금융지점 (삼성금융네트웍스)
+- 직통 전화: 010-7707-4988
+- 팩스 번호: 033-638-8594
+- 대표 전화: 1588-3114
+- 이메일: eunho2546@naver.com
+- 사무실 주소: 강원도 속초시 동해대로4236(교동) 아남프라자 11층
+
+## 6. 공식 배포 및 GitHub Pages 저장소 규정
+- GitHub 저장소: https://github.com/alvin717/my--card.git
+- GitHub Pages 배포 웹 주소: https://alvin717.github.io/my--card/
 - 브랜치: main
-- 자동 배포 스크립트: E:\Gemini CLI\명함앱\배포하기.bat
-- 버셀과 연결된 공식 저장소는 alvin717/my--card (하이픈 2개) 입니다.
+- 자동 동기화 스크립트: 배포하기.bat
+

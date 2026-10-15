@@ -1,12 +1,13 @@
 BEGIN:VCARD
 VERSION:3.0
-N:신;은호;;;
-FN:신은호 대표 (indesign plus)
-ORG:indesign plus;
-TITLE:CEO
-TEL;TYPE=CELL;TYPE=VOICE;TYPE=pref:010-8691-2938
+N:함;용순;;;
+FN:함용순 팀장 (삼성생명 속초금융지점)
+ORG:삼성생명;속초금융지점
+TITLE:팀장
+TEL;TYPE=CELL;TYPE=VOICE;TYPE=pref:010-7707-4988
+TEL;TYPE=WORK;TYPE=VOICE:1588-3114
+TEL;TYPE=WORK;TYPE=FAX:033-638-8594
 EMAIL;TYPE=INTERNET;TYPE=WORK;TYPE=pref:eunho2546@naver.com
-ADR;TYPE=WORK;TYPE=pref:;;강원특별자치도 속초시 수복로85, 1층(교동);;;;
-URL;TYPE=WORK:http://www.indesignplus.co.kr/main/
-NOTE:indesign plus CEO 신은호 공식 모바일 명함
+ADR;TYPE=WORK;TYPE=pref:;;강원도 속초시 동해대로4236(교동) 아남프라자 11층;속초시;강원도;24853;대한민국
+NOTE:삼성생명·화재·카드 속초금융지점 함용순 팀장 공식 모바일 명함
 END:VCARD
