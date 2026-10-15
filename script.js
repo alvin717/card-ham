@@ -22,7 +22,8 @@ const CONTACT_INFO = {
   fax: "033-638-8594",
   centerPhone: "1588-3114",
   email: "eunho2546@naver.com",
-  address: "강원도 속초시 동해대로4236(교동) 아남프라자 11층"
+  address: "강원도 속초시 동해대로4236(교동) 아남프라자 11층",
+  naverMap: "https://map.naver.com/v5/search/%EA%B0%95%EC%9B%90%EB%8F%84%20%EC%86%8D%EC%B4%88%EC%8B%9C%20%EB%8F%99%ED%95%B4%EB%8C%80%EB%A1%9C%204236%20%EC%95%84%EB%82%A8%ED%94%84%EB%9D%BC%EC%9E%90"
 };
 
 // DOM이 완전히 로드된 후 초기화 실행
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactSave();
   initCopyAddress();
   initCopyFax();
+  initNaverMapLink();
   initShareFeatures();
   checkAutoCallParam();
 });
@@ -99,7 +101,24 @@ function initCopyFax() {
 }
 
 /**
- * 6. 명함 공유하기 (카카오톡 및 모바일 명함 주소 복사)
+ * 6. 네이버 지도 길찾기 링크 처리 (카카오톡 인앱 브라우저 완벽 대응)
+ */
+function initNaverMapLink() {
+  const btnNaverMap = document.getElementById("btnNaverMap");
+  if (!btnNaverMap) return;
+
+  const isKakaoTalk = /KAKAOTALK/i.test(navigator.userAgent);
+  btnNaverMap.addEventListener("click", (e) => {
+    if (isKakaoTalk) {
+      e.preventDefault();
+      // 카카오톡 인앱 브라우저 보안 제약 우회를 위해 외부 기본 브라우저로 열기
+      window.location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(CONTACT_INFO.naverMap)}`;
+    }
+  });
+}
+
+/**
+ * 7. 명함 공유하기 (카카오톡 및 모바일 명함 주소 복사)
  */
 function initShareFeatures() {
   const btnShareKakao = document.getElementById("btnShareKakao");
